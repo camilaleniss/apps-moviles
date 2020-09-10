@@ -1,2 +1,4 @@
 # apps-moviles
-Tutoriales and class guides
+Tutorials and class guides 
+
+Semester 2020-2
