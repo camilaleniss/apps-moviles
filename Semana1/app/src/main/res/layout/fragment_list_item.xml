@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/textTasks"
         android:layout_width="327dp"
         android:layout_height="546dp"
         android:layout_marginTop="40dp"

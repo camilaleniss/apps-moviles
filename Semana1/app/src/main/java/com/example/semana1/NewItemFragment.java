@@ -19,6 +19,8 @@ public class NewItemFragment extends Fragment implements View.OnClickListener{
     private  EditText inputTask;
     private Button butSubmit;
 
+    //referencia del otro fragmento observador
+    private OnTaskAddedListener observer;
 
     public NewItemFragment() {
         // Required empty public constructor
@@ -59,8 +61,18 @@ public class NewItemFragment extends Fragment implements View.OnClickListener{
     public void onClick(View view) {
         switch(view.getId()){
             case R.id.butSubmit:
-                Toast.makeText(getActivity(), inputTask.getText().toString(), Toast.LENGTH_SHORT).show();
+                String task = inputTask.getText().toString();
+                observer.onTaskAdded(task);
                 break;
         }
+    }
+
+    public void setObserver(OnTaskAddedListener observer){
+        this.observer =observer;
+    }
+
+    //Implementation of observer pattern
+    public interface OnTaskAddedListener{
+        void onTaskAdded(String task);
     }
 }

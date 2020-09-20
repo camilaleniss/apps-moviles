@@ -25,6 +25,8 @@ public class HomeActivity extends AppCompatActivity {
         fragList = ListItemFrag.newInstance();
         fragNewItem = NewItemFragment.newInstance();
 
+        fragNewItem.setObserver(fragList);
+
         navigator = findViewById(R.id.navigator);
 
         showFragment(fragNewItem);
