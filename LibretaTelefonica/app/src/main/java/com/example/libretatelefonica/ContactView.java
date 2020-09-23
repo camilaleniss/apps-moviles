@@ -14,7 +14,34 @@ public class ContactView extends RecyclerView.ViewHolder {
 
     public ContactView(ConstraintLayout root){
         super(root);
+
+        this.root = root;
+
+        txtNombre = root.findViewById(R.id.txtName);
+        txtTelefono = root.findViewById(R.id.txtCellphone);
     }
 
+    public ConstraintLayout getRoot() {
+        return root;
+    }
 
+    public void setRoot(ConstraintLayout root) {
+        this.root = root;
+    }
+
+    public TextView getTxtNombre() {
+        return txtNombre;
+    }
+
+    public void setTxtNombre(TextView txtNombre) {
+        this.txtNombre = txtNombre;
+    }
+
+    public TextView getTxtTelefono() {
+        return txtTelefono;
+    }
+
+    public void setTxtTelefono(TextView txtTelefono) {
+        this.txtTelefono = txtTelefono;
+    }
 }
