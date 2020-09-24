@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class ContactsAdapter extends RecyclerView.Adapter<ContactView> {
+public class ContactsAdapter extends RecyclerView.Adapter<ContactView> implements ContactView.OnContactItemAction {
 
     private ArrayList<Contact> contacts;
 
@@ -33,15 +33,17 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactView> {
         // Here it generates de view of a item of the list view
         //XML -> View
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View row = inflater.inflate(R.layout.contactrow, null);
+        View row = inflater.inflate(R.layout.contactrow, parent, false);
         ConstraintLayout rowroot = (ConstraintLayout) row;
         ContactView contactView = new ContactView(rowroot);
+        contactView.setListener(this);
 
         return contactView;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ContactView holder, int position) {
+        holder.setContact(contacts.get(position));
         holder.getTxtNombre().setText(contacts.get(position).getNombre());
         holder.getTxtTelefono().setText(contacts.get(position).getTelefono());
     }
@@ -49,5 +51,11 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactView> {
     @Override
     public int getItemCount() {
         return contacts.size();
+    }
+
+    @Override
+    public void onDeleteContact(Contact contact) {
+        contacts.remove(contact);
+        notifyDataSetChanged();
     }
 }
