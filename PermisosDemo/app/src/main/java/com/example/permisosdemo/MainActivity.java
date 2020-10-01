@@ -7,6 +7,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -24,12 +25,15 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+
 import java.io.File;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, ModalDialog.OnOkListener {
 
     public static final int PERMISSIONS_CALLBACK = 11;
     public static final int CAMERA_CALLBACK = 12;
+    public static final int GALLERY_CALLBACK = 13;
 
     private Button btnOpenCamera;
     private Button btnOpenGallery;
@@ -40,6 +44,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView imgMain;
 
     private File file;
+
+    private ModalDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +106,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 break;
             case R.id.btnOpenGallery:
+                Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
+                galleryIntent.setType("image/*");
+                startActivityForResult(galleryIntent, GALLERY_CALLBACK);
+
+                break;
+            case R.id.btnDownloadImg:
+                //Abrir modal
+                dialog = ModalDialog.newInstance();
+                dialog.setListener(this);
+                dialog.show(getSupportFragmentManager(), "urlDialog");
                 break;
         }
     }
@@ -120,6 +136,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     thumbnail.getWidth(), thumbnail.getHeight(), matrix, true);
 
             imgMain.setImageBitmap(rotatedBitMap);
+        }else if(requestCode==GALLERY_CALLBACK && resultCode==RESULT_OK){
+            Uri uri = data.getData();
+            String path = UtilDomi.getPath(this, uri);
+            Log.e(">>>>", ""+path);
+            Bitmap image = BitmapFactory.decodeFile(path);
+            imgMain.setImageBitmap(image);
+
+
         }
+    }
+
+    @Override
+    public void onOk(String url) {
+        dialog.dismiss();
+        Glide.with(this).load(url).fitCenter().into(imgMain);
     }
 }

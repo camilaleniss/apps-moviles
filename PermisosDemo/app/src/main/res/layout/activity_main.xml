@@ -44,6 +44,7 @@
         android:ems="10"
         android:hint="URL de la imagen"
         android:inputType="textPersonName"
+        android:text="https://www.grupoerik.com/98608-thickbox_default/canvas-20x25-cm-pusheen-the-cat-sushi.jpg"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
