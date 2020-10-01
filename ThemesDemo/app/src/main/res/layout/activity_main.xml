@@ -8,9 +8,11 @@
 
     <TextView
         android:id="@+id/txtWelcome"
+        style="@style/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
+        android:fontFamily="@font/roboto_bold"
         android:text="@string/main_title"
         android:textSize="30sp"
         app:layout_constraintHorizontal_bias="0.498"
@@ -20,9 +22,11 @@
 
     <Button
         android:id="@+id/button"
+        style="@style/Button"
         android:layout_width="174dp"
         android:layout_height="57dp"
         android:layout_marginTop="100dp"
+        android:fontFamily="@font/robot_medium"
         android:text="@string/main_button_play"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,9 +34,11 @@
 
     <Button
         android:id="@+id/button2"
+        style="@style/Button"
         android:layout_width="174dp"
         android:layout_height="53dp"
         android:layout_marginTop="60dp"
+        android:fontFamily="@font/robot_medium"
         android:text="@string/main_button_records"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -40,9 +46,11 @@
 
     <Button
         android:id="@+id/button3"
+        style="@style/Button"
         android:layout_width="172dp"
         android:layout_height="50dp"
         android:layout_marginTop="60dp"
+        android:fontFamily="@font/robot_medium"
         android:text="@string/main_button_instructions"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,6 +61,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="40dp"
+        android:fontFamily="@font/roboto_regular"
         android:text="@string/created_by"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
