@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         programmingLanguages.add("C#");
         programmingLanguages.add("Swift");
 
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, (List<String>) listProgramming);
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, programmingLanguages);
         listProgramming.setAdapter(adapter);
 
         listProgramming.setOnItemClickListener(
