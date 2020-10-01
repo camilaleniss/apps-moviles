@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">ThemesDemo</string>
+    <string name="main_title">Mi hermoso juego</string>
+    <string name="main_button_play">Jugar</string>
+    <string name="main_button_records">Mejores puntajes</string>
+    <string name="main_button_instructions">Instrucciones</string>
+    <string name="created_by">Hecho por Camila Lenis</string>
+</resources>

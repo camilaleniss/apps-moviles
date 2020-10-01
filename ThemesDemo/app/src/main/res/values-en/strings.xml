@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">ThemesDemo</string>
+    <string name="main_title">My incredible game</string>
+    <string name="main_button_play">Play</string>
+    <string name="main_button_records">Best Scores</string>
+    <string name="main_button_instructions">Instructions</string>
+    <string name="created_by">Made by Camila Lenis</string>
+</resources>
