@@ -28,6 +28,8 @@ public class MainActivity extends AppCompatActivity implements Counter.onCounter
     private Button btnEnter;
     private TextView txtViewResponse;
 
+    private HTTPUtil util;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,46 +64,22 @@ public class MainActivity extends AppCompatActivity implements Counter.onCounter
         switch(view.getId()){
             case R.id.btnEnter:
                 String url = txtURL.getText().toString();
+                util = new HTTPUtil(url);
 
-                new Thread(
-                        () -> {
-                            getRequest(url);
+                util.setObserver(
+                        response -> {
+                            runOnUiThread(
+                                    ()->{
+                                        txtViewResponse.setText(response);
+                                    }
+                            );
                         }
                 );
+                util.start();
 
                 break;
         }
     }
 
-    private void getRequest(String url){
-        try {
-            //Request
-            URL site = new URL(url);
-            HttpsURLConnection connection= (HttpsURLConnection) site.openConnection();
 
-            //Read
-            InputStream is = connection.getInputStream();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-
-            String mensaje = "";
-            String line="";
-            while((line= reader.readLine()) !=null){
-                mensaje += line;
-            }
-
-            Log.e(">>>>", mensaje);
-
-            String finalMensaje = mensaje;
-
-            runOnUiThread(
-                    ()->{
-                        txtViewResponse.setText(finalMensaje);
-                    }
-            );
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }
