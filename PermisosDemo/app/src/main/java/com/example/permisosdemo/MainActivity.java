@@ -28,6 +28,8 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, ModalDialog.OnOkListener {
 
@@ -38,8 +40,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button btnOpenCamera;
     private Button btnOpenGallery;
     private Button btnDownloadImg;
-
-    private EditText txtImgURL;
 
     private ImageView imgMain;
 
@@ -55,7 +55,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnOpenCamera = findViewById(R.id.btnOpenCamera);
         btnOpenGallery = findViewById(R.id.btnOpenGallery);
         btnDownloadImg = findViewById(R.id.btnDownloadImg);
-        txtImgURL = findViewById(R.id.txtImageURL);
         imgMain = findViewById(R.id.imgMain);
 
         ActivityCompat.requestPermissions(this, new String[]{
@@ -101,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Log.e(">>>>>",""+file);
 
                 Uri uri = FileProvider.getUriForFile(this, getPackageName(), file);
-
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
                 startActivityForResult(intent, CAMERA_CALLBACK);
 
                 break;
@@ -139,17 +138,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }else if(requestCode==GALLERY_CALLBACK && resultCode==RESULT_OK){
             Uri uri = data.getData();
             String path = UtilDomi.getPath(this, uri);
-            Log.e(">>>>", ""+path);
-            Bitmap image = BitmapFactory.decodeFile(path);
+            Bitmap image = null;
+            image = BitmapFactory.decodeFile(path);
             imgMain.setImageBitmap(image);
-
-
         }
     }
 
     @Override
     public void onOk(String url) {
-        dialog.dismiss();
         Glide.with(this).load(url).fitCenter().into(imgMain);
     }
 }

@@ -33,8 +33,6 @@ public class ModalDialog extends DialogFragment implements  View.OnClickListener
         ModalDialog fragment = new ModalDialog();
         Bundle args = new Bundle();
 
-
-
         return fragment;
     }
 
@@ -53,7 +51,7 @@ public class ModalDialog extends DialogFragment implements  View.OnClickListener
         txtURL = root.findViewById(R.id.txtURL);
         btnSubmit = root.findViewById(R.id.btnSubmit);
 
-
+        btnSubmit.setOnClickListener(this);
 
         return root;
     }
@@ -65,13 +63,13 @@ public class ModalDialog extends DialogFragment implements  View.OnClickListener
     @Override
     public void onClick(View view) {
         switch(view.getId()){
-            case R.id.ConstraintLayout:
+            case R.id.btnSubmit:
                 if (listener == null){
                     Log.e("Error", "There is not listener");
                 }else{
                     listener.onOk(txtURL.getText().toString());
                 }
-
+                this.dismiss();
             break;
         }
     }
